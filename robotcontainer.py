@@ -64,12 +64,12 @@ class RobotContainer:
         self.OperatorController.leftBumper().whileFalse(StopMotorsCommand(self.newSubsystem))
         
         # Same thing as before but now were using the right bumper and the MotorForwardCommand
-        # self.OperatorController.rightBumper().whileTrue(MotorForwardCommand(self.newSubsystem))
-        # self.OperatorController.rightBumper().whileFalse(StopMotorsCommand(self.newSubsystem))
+        self.OperatorController.rightBumper().whileTrue(MotorForwardCommand(self.newSubsystem))
+        self.OperatorController.rightBumper().whileFalse(StopMotorsCommand(self.newSubsystem))
         
         self.OperatorController.a().whileTrue(displayingData(self.visionSunsystem))
         
-        self.OperatorController.b().whileTrue(displaySeenAprilTags(self.visionSunsystem))
+        # self.OperatorController.b().whileTrue(displaySeenAprilTags(self.visionSunsystem))
 
     def getAutonomousCommand(self):
         return None

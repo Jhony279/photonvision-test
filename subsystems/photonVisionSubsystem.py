@@ -57,9 +57,7 @@ class visionSubsystem(commands2.Subsystem):
     #     if len(results) > 0:
     #         for i in results:
     #             if results[-1].getFiducialId() > id:
-    #             # return results[-2].getFiducialId()
-    #     else:
-    #         return 0
+    #                 return results[-2].getFiducialId()
   
     def getTragetData(self, id: int, dataType: str) -> float: # Simpler version to get target data (Trying to fix)
         """
@@ -104,5 +102,5 @@ class visionSubsystem(commands2.Subsystem):
         self.targets = self.result.getTargets()
         
         # # Using this to test the getTargetData method
-        # logger.info(f"{self.getTragetData(4, "X-Dist")} data value")
-        # logger.info(f"{len(self.targets)} target amount?")
+        logger.info(f"{self.getTragetData(4, "X-Dist")} data value")
+        logger.info(f"{len(self.targets)} target amount?")
