@@ -11,11 +11,11 @@ from constants import OP
 
 # Import Subsystem
 import subsystems.newSubsystem
-import subsystems.photonVisionSubsystem
+# import subsystems.photonVisionSubsystem
 
 # Import Commands
 from commands.newCommands import MotorBackwardsCommand, MotorForwardCommand, StopMotorsCommand
-from commands.visionCommand import displayingData, displaySeenAprilTags
+# from commands.visionCommand import displayingData, displaySeenAprilTags
 
 
 class RobotContainer:
@@ -34,7 +34,7 @@ class RobotContainer:
         """
         # Define the robot's subsystems
         self.newSubsystem = subsystems.newSubsystem.NewSubsystemClass()
-        self.visionSunsystem = subsystems.photonVisionSubsystem.visionSubsystem()
+        # self.visionSunsystem = subsystems.photonVisionSubsystem.visionSubsystem()
 
         # Assign the driver's controller
         self.DriverController = commands2.button.CommandXboxController(OP.driver_joystick_port)
@@ -67,7 +67,7 @@ class RobotContainer:
         self.OperatorController.rightBumper().whileTrue(MotorForwardCommand(self.newSubsystem))
         self.OperatorController.rightBumper().whileFalse(StopMotorsCommand(self.newSubsystem))
         
-        self.OperatorController.a().whileTrue(displayingData(self.visionSunsystem))
+        # self.OperatorController.a().whileTrue(displayingData(self.visionSunsystem))
         
         # self.OperatorController.b().whileTrue(displaySeenAprilTags(self.visionSunsystem))
 

@@ -1,9 +1,8 @@
 import wpilib
 import commands2
-import rev
 import phoenix6
-import phoenix5
 import logging
+import wpimath.controller
 
 logger = logging.getLogger("Vision")
 
@@ -18,20 +17,27 @@ class NewSubsystemClass(commands2.Subsystem):
         self.phoenixMotor = phoenix6.hardware.TalonFX(1)
         
         # Control Objects (Still working on them)
-        self.back = phoenix6.controls.VelocityDutyCycle(1, 1, True, -.2)
-        self.forward = phoenix6.controls.VelocityDutyCycle(1, 1, True, .2, 0, False, False, False)
-        self.stop = phoenix6.controls.VelocityDutyCycle(1, 1, True, 0, 0, False, False, False)
+        self.back = phoenix6.controls.VelocityDutyCycle(0, 0, True, -.2)
+        self.forward = phoenix6.controls.VelocityDutyCycle(0, 0, True, .2)
+        self.stop = phoenix6.controls.VelocityDutyCycle(0)
+        
+        # PID Controls (for fun)
+        self.armPID = wpimath.controller.PIDController(.025, 0, 0)
+        self.armPID.setTolerance(1)
+        
+        # Karken encoder (Dosent work yet)
+        self.encoderVal = self.phoenixMotor.get_differential_average_position()
     
     # motorGroupForward method will set both motors 1 & 2 forward using the motorGroup variable
     def motorGroupForward(self):
         self.phoenixMotor.set_control(self.forward)
+        # self.phoenixMotor.set_control(self.armPID.calculate(self.encoderVal, -115.0))
         
     # motorGroupBackward method will set both motors 1 & 2 backwards using the motorGroup variable
     def motorGroupBackward(self):
         self.phoenixMotor.set_control(self.back)
+        # self.phoenixMotor.set_control(self.armPID.calculate(self.encoderVal, -115.0))
         
     # stopMotors methhod will stop both motors
     def stopMotors(self):
         self.phoenixMotor.set_control(self.stop)
-        
-    # these methods will only run if they are called/summoned in by a command in the commands folder
